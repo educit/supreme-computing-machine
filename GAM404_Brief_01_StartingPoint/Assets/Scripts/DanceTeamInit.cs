@@ -22,12 +22,16 @@ public class DanceTeamInit : MonoBehaviour
     /// </summary>
     public void InitTeams()
     {
-        Debug.LogWarning("InitTeams called, needs to generate names for the teams and set them with teamA.SetTroupeName and teamA.InitialiseTeamFromNames");
+        Debug.Log("InitTeams called, generating names for the teams and set them with teamA.SetTroupeName and teamA.InitialiseTeamFromNames");
         // We need to set out team names using teamA.SetTroupeName.
+        teamA.SetTroupeName("Team-A");
+        teamB.SetTroupeName("Team-B");
         // We need to generate some character names for our teams to use from our CharacterNameGenerator.
+        // dancersPerSide * two teams
+        teamACharacterNames = nameGenerator.GenerateNames(dancersPerSide);
+        teamBcharacterNames = nameGenerator.GenerateNames(dancersPerSide);
         // We need to spawn in some dancers using teamA.InitialiseTeamFromNames.
-
-
-        Debug.LogWarning("InitTeams called, needs to create character names via CharacterNameGenerator and get them into the team.InitaliseTeamFromNames");
+        teamA.InitaliseTeamFromNames(dancerPrefab, DanceTeam.Direction.Right, teamACharacterNames);
+        teamB.InitaliseTeamFromNames(dancerPrefab, DanceTeam.Direction.Left, teamBcharacterNames);
     }
 }
