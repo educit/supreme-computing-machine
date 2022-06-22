@@ -46,15 +46,15 @@ public class BattleSystem : MonoBehaviour
         else
         {
             // IF we get to here...then we have a team has won...winner winner chicken dinner.
-            DanceTeam winner = null; // null is the same as saying nothing...often seen as a null reference in your logs.
+            DanceTeam winner = teamA.activeDancers.Count > 0 ? teamA : teamB; // null is the same as saying nothing...often seen as a null reference in your logs.
 
             // We need to determine a winner...but how?...maybe look at the previous if statements for clues?
-          
 
             //Enables the win effects, and logs it out to the console.
             winner.EnableWinEffects();
             BattleLog.Log(winner.danceTeamName.ToString(), winner.teamColor);
 
+            Debug.Log($"Winner is {winner.danceTeamName}");
             Debug.Log("DoRound called, but we have a winner so Game Over");
           
         }
@@ -63,9 +63,11 @@ public class BattleSystem : MonoBehaviour
     // This is where we can handle what happens when we win or lose.
     public void FightOver(Character winner, Character defeated, float outcome)
     {
-        Debug.LogWarning("FightOver called, may need to check for winners and/or notify teams of zero mojo dancers");   
+        Debug.Log("FightOver called, checking for winners and/or notify teams of zero mojo dancers");   
         // assign damage...or if you want to restore health if they want that's up to you....might involve the character script.
 
+        defeated.mojoRemaining =-1;
+        defeated.myTeam.RemoveFromActive(defeated);
         //calling the coroutine so we can put waits in for anims to play
         StartCoroutine(HandleFightOver());
     }

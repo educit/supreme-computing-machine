@@ -30,6 +30,7 @@ public class DanceTeamInit : MonoBehaviour
         // dancersPerSide * two teams
         teamACharacterNames = nameGenerator.GenerateNames(dancersPerSide);
         teamBcharacterNames = nameGenerator.GenerateNames(dancersPerSide);
+
         // We need to spawn in some dancers using teamA.InitialiseTeamFromNames.
         teamA.InitaliseTeamFromNames(dancerPrefab, DanceTeam.Direction.Right, teamACharacterNames);
         teamB.InitaliseTeamFromNames(dancerPrefab, DanceTeam.Direction.Left, teamBcharacterNames);

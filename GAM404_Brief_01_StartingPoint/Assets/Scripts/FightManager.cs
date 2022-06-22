@@ -32,12 +32,24 @@ public class FightManager : MonoBehaviour
         int teamBBattlePoints = teamBCharacter.ReturnBattlePoints();
 
         // We need to do some logic hear to check who wins based on the battle points, we want to handle team A winning, team B winning and draw scenarios.
-        winner = teamACharacter;
-        defeated = teamBCharacter;
+        if(teamABattlePoints > teamBBattlePoints){
+            winner =  teamACharacter;
+            defeated = teamBCharacter;
+            Debug.Log("Fight won by TeamA");
+            BattleLog.Log("Fight won by TeamA!", drawCol);
+        }
+        else{
+            winner =  teamBCharacter;
+            defeated = teamACharacter;
+            Debug.Log("Fight won by TeamB");
+            BattleLog.Log("Fight won by TeamB!", drawCol);
+        }
+        //winner =  teamACharacter;
+        //defeated = teamBCharacter;
         outcome = 0;
-        BattleLog.Log("Fight is a draw!", drawCol);
+        //BattleLog.Log("Fight is a draw!", drawCol);
 
-        Debug.LogWarning("Attack called, may want to use the BattleLog.Log() to report the dancers and the outcome of their dance off.");
+        Debug.Log("Attack called, used the BattleLog.Log() to report the dancers and the outcome of their dance off.");
 
         // Pass on the winner/loser and the outcome to our fight completed function.
         FightCompleted(winner, defeated, outcome);

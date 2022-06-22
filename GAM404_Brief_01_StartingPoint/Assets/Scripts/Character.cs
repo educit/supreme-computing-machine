@@ -45,9 +45,12 @@ public class Character : MonoBehaviour
     /// </summary>
     private void InitialStats()
     {
-        Debug.LogWarning("InitialStats called, needs to distribute points into stats. This should be able to be ported from previous brief work");
+        Debug.Log("InitialStats called, distributing points into stats. This should be able to be ported from previous brief work");
         // We probably want to set out default level and some default random stats 
         // for our luck, style and rythmn.
+        rhythm = Random.Range(1,5);
+        style = Random.Range(1,5);
+        luck = availablePoints - rhythm - style;
     }
 
     /// <summary>
@@ -69,8 +72,14 @@ public class Character : MonoBehaviour
         // We want to design some algorithm that will generate a number of points based off of our luck,style and rythm, we probably want to add some randomness in our calculation too
         // to ensure that there is not always a draw, by default it just returns 0. 
         // If you right click this function and find all references you can see where it is called.
-        Debug.LogWarning("ReturnBattlePoints has been called we probably want to create some battle points based on our stats");
-        return 0;
+        Debug.Log("ReturnBattlePoints has been called, creating some battle points based on our stats");
+        var styleWeight = Random.Range(0.5f, 0.9f);
+        var rhythmWeight = Random.Range(0.5f, 0.9f);
+
+        var battlePoints = style * styleWeight + rhythm * rhythmWeight;
+        Debug.Log($"BattlePoints: {battlePoints}");
+
+        return Mathf.FloorToInt(battlePoints);
     }
 
     /// <summary>
